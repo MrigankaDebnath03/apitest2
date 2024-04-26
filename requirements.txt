@@ -4,4 +4,3 @@ spacy
 pdfplumber
 python-docx
 starlette
-subprocess
