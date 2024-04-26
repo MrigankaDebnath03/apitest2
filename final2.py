@@ -8,6 +8,7 @@ import re  # Added missing import
 import pdfplumber  # Added missing import
 import spacy  # Added missing import
 from docx import Document  # Added missing import
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
