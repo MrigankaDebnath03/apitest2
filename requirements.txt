@@ -3,5 +3,4 @@ uvicorn
 starlette
 pyresparser
 spacy
-nltk
 python-multipart
