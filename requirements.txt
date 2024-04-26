@@ -4,3 +4,4 @@ spacy
 pdfplumber
 python-docx
 starlette
+python-multipart
