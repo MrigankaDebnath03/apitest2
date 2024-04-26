@@ -1,6 +1,10 @@
+from fastapi import FastAPI
+from typing import List, Dict
 import spacy
 import re
 import subprocess
+
+app = FastAPI()
 
 # Check if en_core_web_sm is installed, and install it if not
 try:
@@ -14,7 +18,7 @@ except OSError:
 email_pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
 phone_pattern = r"\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b"
 
-def extract_info(text):
+def extract_info(text: str) -> Dict[str, List[str]]:
     doc = nlp(text)
 
     names = []
@@ -29,16 +33,12 @@ def extract_info(text):
         elif re.match(phone_pattern, ent.text):
             phone_numbers.append(ent.text)
 
-    return names, emails, phone_numbers
+    return {
+        "names": names,
+        "emails": emails,
+        "phone_numbers": phone_numbers
+    }
 
-# Example usage
-text_to_process = """
-John Doe is a software engineer. You can reach him at john.doe@example.com or call him at +1 (123) 456-7890.
-Jane Smith is a data scientist. Her email is jane.smith@email.com and her phone number is 987-654-3210.
-"""
-
-extracted_names, extracted_emails, extracted_phone_numbers = extract_info(text_to_process)
-
-print("Extracted Names:", extracted_names)
-print("Extracted Emails:", extracted_emails)
-print("Extracted Phone Numbers:", extracted_phone_numbers)
+@app.post("/extract-info")
+def extract_info_endpoint(text: str) -> Dict[str, List[str]]:
+    return extract_info(text)
