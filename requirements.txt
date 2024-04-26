@@ -4,3 +4,4 @@ starlette
 pyresparser
 spacy
 python-multipart
+nltk
