@@ -4,10 +4,12 @@ import zipfile
 import os
 import csv
 from pyresparser import ResumeParser
-
 from starlette.middleware.cors import CORSMiddleware
-
 import subprocess
+import nltk
+
+# Download NLTK stopwords if not already available
+nltk.download('stopwords', quiet=True)
 
 
 app = FastAPI()
