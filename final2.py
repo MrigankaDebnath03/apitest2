@@ -9,7 +9,7 @@ import subprocess
 import nltk
 
 # Download NLTK stopwords if not already available
-nltk.download('stopwords', quiet=True)
+nltk.download('stopwords')
 
 
 app = FastAPI()
