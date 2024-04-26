@@ -11,6 +11,13 @@ from docx import Document  # Added missing import
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Adjust origins as needed
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+)
+
 def get_file_paths(folder_path):
     file_paths = []
     for root, _, files in os.walk(folder_path):
